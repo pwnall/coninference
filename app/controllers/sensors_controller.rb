@@ -5,12 +5,17 @@ class SensorsController < ApplicationController
   # GET /events/1/devices/1/sensors
   # GET /events/1/devices/1/sensors.json
   def index
-    @readings = @device.sensors_for @event
   end
 
   # GET /events/1/devices/1/sensors/light
   # GET /events/1/devices/1/sensors/light.json
   def show
+    sensor_kind = params[:id]
+    @readings = @device.sensor_readings_for @event, sensor_kind
+
+    respond_to do |format|
+      format.json { render json: { readings: @readings } }
+    end
   end
 
   # GET /events/1/devices

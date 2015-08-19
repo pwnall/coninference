@@ -18,8 +18,7 @@ Rails.application.routes.draw do
   end
   scope 'events/:event_id' do
     scope 'devices/:device_id' do
-      get 'sensors/:sensor_id(.:format)' => 'events#show',
-          as: :events_device_sensor
+      get 'sensors/:id(.:format)' => 'sensors#show', as: :event_device_sensor
       get 'sensors(.:format)' => 'sensors#index', as: :event_device_sensors
     end
     get 'devices(.:format)' => 'sensors#device_list', as: :event_device_list

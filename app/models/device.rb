@@ -62,35 +62,35 @@ class Device < ActiveRecord::Base
     end
   end
 
-  # Time-series of all sensor values during an event's course.
-  def sensors_for(event)
+  # Time-series of a sensor's values during an event's course.
+  def sensor_readings_for(event, kind)
     time_series = []
-    values = sensors_at event.started_at
+    value = sensor_at event.started_at, kind
 
-    edges = edges_for event
+    edges = edges_for(event, kind).all
     time = event.started_at
     offset = 0
     end_time = event.ended_at
     while time < end_time
       while edges[offset] && edges[offset].created_at <= time
         edge = edges[offset]
-        values[edge.kind] = values[edge.value]
+        value = edge.value
         offset += 1
       end
-      time_series << values.dup
+      time_series << value
       time += 1.second
     end
     time_series
   end
 
   # All the sensor changes that occured during an event's course.
-  def edges_for(event)
-    edges_between event.started_at, event.ended_at
+  def edges_for(event, kind)
+    edges_between(event.started_at, event.ended_at).where(kind: kind)
   end
 
   # All the sensor changes that occured between certain times.
   def edges_between(start_time, end_time)
-    sensor_edges.after(start_time).before(end_time).order(:created_at).all
+    sensor_edges.after(start_time).before(end_time).order(:created_at)
   end
 
   # The most recent reported values for all sensors.
