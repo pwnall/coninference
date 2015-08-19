@@ -1,0 +1,51 @@
+<header class="row" id="page-title">
+  <h1><%= @bar.name %> Cups</h1>
+</header>
+
+
+<div class="row form-top">
+  <div class="small-8 small-centered columns">
+    <p class="form-description">
+      Enter a new SmartCup's code below to activate it for this bar!
+      <span data-tooltip class="has-tip tip-right"
+          title="Look at your SmartCup's LCD display to find a 10-digit number code">
+        ?
+      </span>
+    </p>
+    <%= form_for @registration, url: bar_devices_url(@registration.bar) do |f| %>
+    <div class="row collapse postfix-radius">
+      <div class="small-8 columns">
+        <%= f.number_field :code, autofocus: true, required: true,
+              placeholder: '123 456 789 0', maxlength: 13 %>
+      </div>
+      <div class="small-4 columns">
+        <%= f.button type: 'submit', class: 'success button postfix' do %>
+          <%= fa_icon :link %> Link
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<section class="row table">
+  <hgroup class="table-header row">
+    <div class="small-4 columns">
+      <h3>Name</h3>
+    </div>
+    <div class="small-4 columns">
+      <h3>Recently triggered sensors</h3>
+    </div>
+    <div class="small-4 columns">
+      <h3>
+        Locate Cup
+        <span data-tooltip class="has-tip tip-right"
+            title="Can't find your cup? Click to make your cup start blinking!">
+          ?
+        </span>
+      </h3>
+    </div>
+  </hgroup>
+
+  <%= render partial: 'devices/device', collection: @devices, as: :device %>
+</section>

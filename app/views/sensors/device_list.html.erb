@@ -1,0 +1,19 @@
+<h2>Experiment <%= @event.label %></h2>
+
+<table>
+  <tbody>
+  <% @devices.each do |device| %>
+    <tr>
+      <td>
+        <%= link_to event_device_sensors_path(@event, device) do %>
+          <%= device.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= device.edges_for(@event).length %> changes
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

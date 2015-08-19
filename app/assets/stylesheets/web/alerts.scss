@@ -1,0 +1,15 @@
+#flash-notice-box, #flash-alert-box {
+  @include alert();
+  .close {
+    @include alert-close();
+  }
+  &.alert-close {
+    opacity: 0;
+  }
+}
+#flash-notice-box {
+  @include alert-style($primary-color);
+}
+#flash-alert-box {
+  @include alert-style($alert-color);
+}

@@ -1,0 +1,39 @@
+h1.logo {
+  margin: 2rem auto;
+  font-size: 4rem;
+
+  span.site-name {
+    margin-right: 2rem;
+    transform: skewX(-10deg);
+    -webkit-transform: skewX(-10deg);
+  }
+
+  i.fa {
+    transform: translateY(-1rem) rotate(270deg) skewX(10deg);
+    -webkit-transform: translateY(-1rem) rotate(270deg) skewX(10deg);
+    vertical-align: middle;
+  }
+}
+
+section.screen-captures {
+  margin: 3rem auto;
+}
+
+section.login-controls {
+  margin: 1rem auto;
+
+  .button {
+    margin: auto 0.8rem;
+  }
+}
+
+.slide-container {
+  display: none;
+  &.slick-initialized {
+    display: block;
+  }
+
+  .slick-prev:before, .slick-next:before {
+    color: black;
+  }
+}

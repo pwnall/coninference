@@ -1,0 +1,13 @@
+<%= form_for @device, builder: FoundationFormBuilder do |f| %>
+
+  <%= f.text_field :name, placeholder: 'Smart Cup 42', autofocus: true,
+          required: true, label: 'Cup Name' %>
+
+  <div class="row">
+    <div class="small-10 small-offset-1 columns">
+      <%= f.button type: :submit, class: 'large button expand' do %>
+        <%= fa_icon :save %> Save
+      <% end %>
+    </div>
+  </div>
+<% end %>

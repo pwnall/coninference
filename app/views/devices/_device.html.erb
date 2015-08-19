@@ -1,0 +1,26 @@
+<div class="row table-row">
+  <div class="small-4 columns">
+    <%= link_to device.name, device, title: "Serial #{device.serial}" %>
+    <%= link_to edit_device_path(device), class: 'icon-button' do %>
+      <%= fa_icon :pencil %>
+    <% end %>
+  </div>
+  <div class="small-4 columns">
+    <%= content_tag :span, data: { liabilities_device: device.to_param,
+          liabilities_refresh: device_liabilities_url(device) } do %>
+      <%= render 'liabilities/pane', liabilities: device.liabilities %>
+    <% end %>
+  </div>
+  <div class="small-4 columns">
+    <%= link_to blink_device_path(device), method: :post,
+          class: 'icon-button' do %>
+      <%= fa_icon :'lightbulb-o' %>
+    <% end %>
+  </div>
+  <div class="edge-field">
+    <%= link_to device, method: :delete, class: 'icon-button',
+          data: { confirm: 'Are you sure?' } do %>
+      <%= fa_icon :times %>
+    <% end %>
+  </div>
+</div>

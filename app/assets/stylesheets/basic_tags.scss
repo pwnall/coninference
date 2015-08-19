@@ -1,0 +1,43 @@
+header#page-title {
+  margin: 2rem auto;
+
+  h1 {
+    display: inline-block;
+    padding-right: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.row.form-top {
+  margin-bottom: 1rem;
+}
+
+.table {
+  text-align: center;
+
+  hgroup.table-header {
+    margin-bottom: 1.5rem;
+
+    h3 {
+      color: #7a0099;
+    }
+  }
+}
+
+.table-row {
+  height: 3rem;
+  font-size: 1.1rem;
+}
+
+.icon-button {
+  padding: 0;
+  margin: 0 0 0 0.5rem;
+  color: #008CBA;
+  background: none;
+  border: none;
+
+  &:hover {
+    color: #B80065;
+    background: none;
+  }
+}

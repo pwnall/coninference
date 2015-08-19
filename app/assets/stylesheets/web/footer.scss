@@ -1,0 +1,29 @@
+$header-height: 45px;
+$footer-height: 80px;
+
+article#page-body {
+  height: 100%;
+  margin-top: -$header-height;
+  padding-top: $header-height;
+  padding-bottom: $footer-height;
+}
+
+body > article#page-body {
+  height: auto;
+  min-height: 100%;
+}
+
+#footer {
+  clear: both;
+  position: relative;
+  z-index: 10;
+  height: $footer-height;
+  margin-top: -$footer-height;
+  width: 100%;
+  border-top: 1px solid hsl(0deg, 0%, 95%);
+}
+
+#footer-nav {
+  margin: 0;
+  padding: 1.5rem 1rem;
+}

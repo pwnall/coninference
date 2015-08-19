@@ -1,0 +1,13 @@
+<h2>New Experiment</h2>
+
+<%= form_for @event, builder: FoundationFormBuilder do |f| %>
+  <%= f.text_field :label, required: true, label: 'Label' %>
+
+  <div class="row">
+    <div class="small-11 small-offset-1 columns">
+      <%= f.button type: 'submit', class: 'large success button expand' do %>
+        <%= fa_icon :save %> Start Experiment
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,52 @@
+<header class="row" id="page-title">
+  <h1><%= @device.name %> at <%= @device.bar.name %></h1>
+</header>
+
+<p>
+  <%= link_to edit_device_path(@device), class: 'button' do %>
+    <%= fa_icon :pencil %> Rename
+  <% end %>
+  <%= link_to blink_device_path(@device), method: :post,
+        class: 'button' do %>
+    <%= fa_icon :'lightbulb-o' %> Blink
+  <% end %>
+</p>
+
+<h3>Recently triggered sensors</h3>
+<%= content_tag :p, data: { liabilities_device: @device.to_param,
+      liabilities_refresh: device_liabilities_url(@device) } do %>
+  <%= render 'liabilities/pane', liabilities: @device.liabilities %>
+<% end %>
+
+<h3>Installed Sensors</h3>
+<table>
+<% if @device.sensor_info %>
+  <% @device.sensor_info.data.each do |name, value| %>
+  <tr>
+    <td><%= name %></td>
+    <td><%= value %></td>
+  </tr>
+  <% end %>
+<% end %>
+</table>
+
+<h3>Software</h3>
+<table>
+  <tr>
+    <td>Board Serial</td>
+    <td><%= @device.serial %></td>
+  </tr>
+  <tr>
+    <td>Node Version</td>
+    <td><%= @device.node_version %></td>
+  </tr>
+</table>
+
+<p>
+  <%= link_to bar_devices_path(@device.bar), class: 'button success' do %>
+    <%= fa_icon :glass %> View All Cups at <%= @device.bar.name %>
+  <% end %>
+  <%= link_to bar_path(@device.bar), class: 'button' do %>
+    <%= fa_icon :list %> View Rules at <%= @device.bar.name %>
+  <% end %>
+</p>

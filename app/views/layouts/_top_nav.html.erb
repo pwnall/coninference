@@ -1,0 +1,57 @@
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1>
+        <%= link_to root_url do %>
+          <%= fa_icon :home %> ConINference
+        <% end %>
+      </h1>
+    </li>
+  </ul>
+  <% if current_user %>
+  <section class="top-bar-section">
+    <ul class="left">
+    </ul>
+    <ul clas="left">
+      <li class="has-dropdown">
+        <%= link_to events_path do %>
+          <%= fa_icon :microphone %> Devices
+        <% end %>
+      </li>
+      <li class="has-dropdown">
+        <%= link_to events_path do %>
+          <%= fa_icon :calendar %> Experiments
+        <% end %>
+        <ul class="dropdown">
+          <li>
+            <%= link_to new_event_path do %>
+              <%= fa_icon :plus %> Start Experiment
+            <% end %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="right">
+      <li class="has-dropdown">
+        <a>
+          <%= fa_icon :user %> <%= current_user.email %>
+        </a>
+        <ul class="dropdown">
+          <% if current_user.password_credential %>
+          <li>
+            <%= link_to session_change_password_path do %>
+              <%= fa_icon :key %> Change Password
+            <% end %>
+          </li>
+          <% end %>
+          <li>
+            <%= link_to session_path, method: :delete do %>
+              <%= fa_icon :'sign-out' %> Sign Out
+            <% end %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <% end %>
+</nav>

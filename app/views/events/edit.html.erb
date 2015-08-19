@@ -1,0 +1,17 @@
+<h2>Edit Experiment</h2>
+
+<%= form_for @event, builder: FoundationFormBuilder do |f| %>
+  <%= f.text_field :label, required: true, label: 'Label' %>
+
+  <div class="row">
+    <div class="small-11 small-offset-1 columns">
+      <%= f.button type: 'submit', class: 'large success button expand' do %>
+        <% if @event.ended_at %>
+        <%= fa_icon :save %> Save Experiment
+        <% else %>
+        <%= fa_icon :save %> End Experiment
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
