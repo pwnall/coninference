@@ -14,7 +14,7 @@ class SensorEdge < ActiveRecord::Base
   validates :device_time, presence: true
 
   # The types of sensors supported by the system.
-  KINDS = Set.new [:light, :temperature, :touch, :loudness, :motion]
+  KINDS = Set.new [:light, :temperature, :micpower, :touch, :loudness, :motion]
 
   # Changes that occurred before a given time.
   scope :before, -> (time) { where('created_at <= ?', time) }

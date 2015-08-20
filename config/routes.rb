@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       put :sensors
     end
   end
+  match '/boards(.:format)' => 'boards#cors_options', via: :options
+  match '/boards/:id/sensors(.:format)' => 'boards#cors_options', via: :options
 
   root to: 'session#show'
 

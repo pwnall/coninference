@@ -87,8 +87,12 @@ class Device < ActiveRecord::Base
   end
 
   # All the sensor changes that occured during an event's course.
-  def edges_for(event, kind)
-    edges_between(event.started_at, event.ended_at).where(kind: kind)
+  def edges_for(event, kind = nil)
+    rel = edges_between(event.started_at, event.ended_at)
+    if kind
+      rel = rel.where(kind: kind)
+    end
+    rel
   end
 
   # All the sensor changes that occured between certain times.

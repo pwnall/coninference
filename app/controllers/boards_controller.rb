@@ -1,6 +1,7 @@
 class BoardsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_device, only: [:show, :update, :sensors]
+  before_action :set_cors_headers
 
   # GET /boards/1.json
   def show
@@ -38,6 +39,11 @@ class BoardsController < ApplicationController
     end
   end
 
+  # OPTIONS /boards
+  def cors_options
+    response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT'
+    head :ok
+  end
 
   # PUT /boards/1/sensors.json
   def sensors
@@ -45,11 +51,15 @@ class BoardsController < ApplicationController
     render json: {}, status: :ok
   end
 
-  def set_device
-    @device = Device.where(key: params[:id]).first!
-  end
-  def board_params
-    params.require(:board).permit(:node_version, :serial, :push_url)
-  end
-  private :set_device
+  private
+    def set_device
+      @device = Device.where(key: params[:id]).first!
+    end
+    def board_params
+      params.require(:board).permit(:node_version, :serial, :push_url)
+    end
+    def set_cors_headers
+      response.headers['Access-Control-Allow-Origin'] = '*'
+      response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    end
 end
