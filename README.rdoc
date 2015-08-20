@@ -3,8 +3,9 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Steps for installation:
-
+-----
+Steps for installation of the server:
+-----
 
 0. check out this repo :P
 1. follow the instructions here to install rbenv:
@@ -32,6 +33,22 @@ Now you're all set. To test, go to:
 localhost:3000
 
 sign in - doesn't matter what service you use
+
+-----
+Steps for configuring an Edison device:
+-----
+
+git clone https://github.com/pwnall/edison-cup
+load the project and install on the board
+
+If setting up a new board from scratch, go through all of README.md. But in practice, just do this (replacing SERVER_HOST with the appropriate hostname/ip):
+
+mkdir -p ~/.edison-cup
+echo "http://SERVER_HOST:3000" > ~/.edison-cup/server.url
+
+Run the project.
+
+===
 
 Things you may want to cover:
 
