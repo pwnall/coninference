@@ -11,7 +11,7 @@ class SessionController < ApplicationController
 
   # Sets up the 'session/home' view. A user is logged in.
   def home
-    redirect_to events_url
+    redirect_to map_rooms_url
   end
   private :home
 

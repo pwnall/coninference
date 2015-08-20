@@ -216,7 +216,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   byebug
-  chart-js-rails (>= 0.0.0)
+  chart-js-rails (>= 0.0.9)
   coffee-rails (~> 4.1.0)
   coffee-rails-source-maps (~> 1.4.0)
   exception_notification (>= 4.0.1)

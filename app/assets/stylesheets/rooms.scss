@@ -1,0 +1,17 @@
+svg#map {
+  fill: none;
+  fill-opacity: 35%;
+  stroke: #002fff;
+  stroke-width: 4;
+  stroke-miterlimit: 10;
+
+  .free {
+    stroke: #74b800;
+    fill: #74b800;
+  }
+
+  .busy {
+    stroke: #b80040;
+    fill: #b80040;
+  }
+}

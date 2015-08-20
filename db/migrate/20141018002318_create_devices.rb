@@ -1,7 +1,7 @@
 class CreateDevices < ActiveRecord::Migration
   def change
     create_table :devices do |t|
-      t.references :bar, index: true, null: true
+      t.references :room, index: true, null: true
       t.string :name, null: true, limit: 64
       t.string :url_name, limit: 32, null: false, index: { unique: true }
       t.string :key, null: false, limit: 64, index: { unique: true }

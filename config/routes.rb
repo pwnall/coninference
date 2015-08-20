@@ -16,6 +16,11 @@ Rails.application.routes.draw do
       post :blink
     end
   end
+  resources :rooms do
+    collection do
+      get :map
+    end
+  end
   scope 'events/:event_id' do
     scope 'devices/:device_id' do
       get 'sensors/:id(.:format)' => 'sensors#show', as: :event_device_sensor

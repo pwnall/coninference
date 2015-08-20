@@ -1,5 +1,8 @@
 # An Edison board.
 class Device < ActiveRecord::Base
+  # The conference room in which this board has been installed.
+  belongs_to :room, inverse_of: :device
+
   # The device's login key.
   validates :key, presence: true, length: 1..64, uniqueness: true
   before_validation :generate_key

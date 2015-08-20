@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818033753) do
+ActiveRecord::Schema.define(version: 20150819194636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150818033753) do
   add_index "credentials", ["user_id", "type"], name: "index_credentials_on_user_id_and_type", using: :btree
 
   create_table "devices", force: :cascade do |t|
-    t.integer "bar_id"
+    t.integer "room_id"
     t.string  "name",         limit: 64
     t.string  "url_name",     limit: 32,  null: false
     t.string  "key",          limit: 64,  null: false
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20150818033753) do
     t.string  "serial",       limit: 64
   end
 
-  add_index "devices", ["bar_id"], name: "index_devices_on_bar_id", using: :btree
   add_index "devices", ["key"], name: "index_devices_on_key", unique: true, using: :btree
+  add_index "devices", ["room_id"], name: "index_devices_on_room_id", using: :btree
   add_index "devices", ["url_name"], name: "index_devices_on_url_name", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 20150818033753) do
 
   add_index "events", ["url_name"], name: "index_events_on_url_name", unique: true, using: :btree
   add_index "events", ["user_id", "started_at"], name: "index_events_on_user_id_and_started_at", using: :btree
+
+  create_table "rooms", force: :cascade do |t|
+    t.string   "name",       limit: 32, null: false
+    t.string   "map_id",     limit: 32, null: false
+    t.boolean  "occupied",              null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "sensor_edges", force: :cascade do |t|
     t.integer  "device_id",              null: false
