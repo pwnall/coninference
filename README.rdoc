@@ -3,6 +3,36 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
+Steps for installation:
+
+
+0. check out this repo :P
+1. follow the instructions here to install rbenv:
+    https://github.com/sstephenson/rbenv#installation
+2. install ruby-build:
+    https://github.com/sstephenson/ruby-build#readme
+3. from anywhere, run
+    rbenv install 2.2.2
+4. from anywhere, run [install home-brew if you don’t have it]
+    brew install postgres
+5. from anywhere, run
+    ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+6. from anywhere, run
+    gem install bundler
+7. from your checkout dir, run
+    bundle install
+8. from your checkout dir, run
+    rake db:create db:migrate db:seed
+9. from your checkout dir, run
+    rails s --bind 0.0.0.0
+
+Now you're all set. To test, go to:
+
+localhost:3000
+
+sign in - doesn't matter what service you use
+
 Things you may want to cover:
 
 * Ruby version
