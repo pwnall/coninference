@@ -1,7 +1,7 @@
 # An Edison board.
 class Device < ActiveRecord::Base
   # The conference room in which this board has been installed.
-  belongs_to :room, inverse_of: :device
+  belongs_to :room, inverse_of: :devices
 
   # The device's login key.
   validates :key, presence: true, length: 1..64, uniqueness: true
@@ -25,9 +25,6 @@ class Device < ActiveRecord::Base
     self.url_name ||=
         Base32.encode(SecureRandom.random_bytes(16)).downcase.sub(/=*$/, '')
   end
-
-  # The sensor reading changes reported by this board.
-  has_many :sensor_edges, dependent: :destroy
 
   include PushReceiver
 
@@ -65,55 +62,9 @@ class Device < ActiveRecord::Base
     end
   end
 
-  # Time-series of a sensor's values during an event's course.
-  def sensor_readings_for(event, kind)
-    time_series = []
-    value = sensor_at event.started_at, kind
-
-    edges = edges_for(event, kind).all
-    time = event.started_at
-    offset = 0
-    end_time = event.ended_at
-    while time < end_time
-      while edges[offset] && edges[offset].created_at <= time
-        edge = edges[offset]
-        value = edge.value
-        offset += 1
-      end
-      time_series << value
-      time += 1.second
-    end
-    time_series
-  end
-
-  # All the sensor changes that occured during an event's course.
-  def edges_for(event, kind = nil)
-    rel = edges_between(event.started_at, event.ended_at)
-    if kind
-      rel = rel.where(kind: kind)
-    end
-    rel
-  end
-
-  # All the sensor changes that occured between certain times.
-  def edges_between(start_time, end_time)
-    sensor_edges.after(start_time).before(end_time).order(:created_at)
-  end
-
-  # The most recent reported values for all sensors.
-  def sensors_at(time)
-    values = {}
-    SensorEdge::KINDS.each do |kind|
-      values[kind] = sensor_at time, kind
-    end
-    values
-  end
-
-  # The most recent reported value for the given sensor.
-  def sensor_at(time, kind)
-    edge = sensor_edges.where(kind: kind).before(time).order(:created_at).last
-    edge && edge.value
-  end
+  # The sensor reading changes reported by this board.
+  has_many :sensor_edges, dependent: :destroy
+  include HasSensorEdges
 
   # Reacts based on sensor data.
   #
@@ -126,6 +77,9 @@ class Device < ActiveRecord::Base
     device_time = Time.at(device_time_js / 1000.0)
     sensor_diff.each do |kind, value|
       sensor_edges.create! kind: kind, device_time: device_time, value: value
+    end
+    unless room.nil?
+      room.sensors_changed self, sensor_diff
     end
   end
 end

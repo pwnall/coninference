@@ -23,4 +23,5 @@ class MapsClass
 window.Coninference ||= {}
 window.Coninference.Maps = new MapsClass
 $ ->
-  Coninference.Maps.onChange()
+  if window.coninferenceMapUrl
+    Coninference.Maps.onChange()

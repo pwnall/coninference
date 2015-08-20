@@ -14,8 +14,13 @@
     </ul>
     <ul clas="left">
       <li class="has-dropdown">
-        <%= link_to events_path do %>
+        <%= link_to devices_path do %>
           <%= fa_icon :microphone %> Devices
+        <% end %>
+      </li>
+      <li class="has-dropdown">
+        <%= link_to rooms_path do %>
+          <%= fa_icon :map %> Rooms
         <% end %>
       </li>
       <li class="has-dropdown">

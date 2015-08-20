@@ -65,14 +65,20 @@ ActiveRecord::Schema.define(version: 20150820041812) do
   add_index "maps", ["url_name"], name: "index_maps_on_url_name", unique: true, using: :btree
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "map_id",                  null: false
-    t.string  "name",         limit: 32, null: false
-    t.string  "dom_selector", limit: 32, null: false
-    t.boolean "occupied",                null: false
+    t.integer "map_id",                   null: false
+    t.string  "url_name",     limit: 32,  null: false
+    t.string  "name",         limit: 32,  null: false
+    t.string  "dom_selector", limit: 32,  null: false
+    t.boolean "occupied",                 null: false
+    t.string  "key",          limit: 64,  null: false
+    t.string  "push_url",     limit: 256
   end
 
   add_index "rooms", ["dom_selector"], name: "index_rooms_on_dom_selector", unique: true, using: :btree
+  add_index "rooms", ["key"], name: "index_rooms_on_key", unique: true, using: :btree
+  add_index "rooms", ["map_id", "name"], name: "index_rooms_on_map_id_and_name", unique: true, using: :btree
   add_index "rooms", ["map_id"], name: "index_rooms_on_map_id", using: :btree
+  add_index "rooms", ["url_name"], name: "index_rooms_on_url_name", unique: true, using: :btree
 
   create_table "sensor_edges", force: :cascade do |t|
     t.integer  "device_id",              null: false

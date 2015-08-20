@@ -25,6 +25,9 @@ class PushNotificationsClass
         window.location = window.location.href
       when 'rooms-changed'
         Coninference.Maps.onChange()
+      when 'room-sensors-changed'
+        for sensorGraph in Coninference.sensorGraphs
+          sensorGraph.onChange()
 
   # Uploads the push notification to the server, if it changed.
   _updateServer: ->

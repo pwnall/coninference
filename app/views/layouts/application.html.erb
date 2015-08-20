@@ -42,8 +42,8 @@
 </footer>
 
 <%= javascript_include_tag :application %>
-<% if @map %>
-<%= w3gram_setup_tag @map %>
+<% if @room || @map %>
+<%= w3gram_setup_tag @room || @map %>
 <% end %>
 </body>
 </html>

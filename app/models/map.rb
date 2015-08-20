@@ -12,7 +12,9 @@ class Map < ActiveRecord::Base
         Base32.encode(SecureRandom.random_bytes(16)).downcase.sub(/=*$/, '')
   end
 
-  # The user's push notifications key.
+  # The floor plan's push notifications key.
+  #
+  # Users subscribe to this when seeing a floor plan.
   validates :key, presence: true, length: 1..64, uniqueness: true
   before_validation :generate_key
 

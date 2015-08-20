@@ -1,0 +1,18 @@
+<h2>Rooms</h2>
+
+<table>
+  <tbody>
+  <% @rooms.each do |room| %>
+    <tr>
+      <td>
+        <%= link_to room_path(room) do %>
+          <%= room.name %> on <%= room.map.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= room.devices.length %> devices
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -12,17 +12,24 @@ Rails.application.routes.draw do
   authpwn_session
   post 'session/push_info'
 
-  resources :events
-  resources :devices do
-    member do
-      post :blink
-    end
-  end
   resources :maps, only: [:show] do
     member do
       post :push_info
     end
   end
+  resources :rooms, only: [:show, :index] do
+    member do
+      post :push_info
+    end
+  end
+  get 'rooms/:room_id/sensors/:id(.:format)' => 'sensors#room_show',
+      as: :room_sensor
+  resources :devices do
+    member do
+      post :blink
+    end
+  end
+  resources :events
   scope 'events/:event_id' do
     scope 'devices/:device_id' do
       get 'sensors/:id(.:format)' => 'sensors#show', as: :event_device_sensor
