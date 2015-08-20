@@ -5,12 +5,12 @@ svg#map {
   stroke-width: 4;
   stroke-miterlimit: 10;
 
-  .free {
+  g.free * {
     stroke: #74b800;
     fill: #74b800;
   }
 
-  .busy {
+  g.busy * {
     stroke: #b80040;
     fill: #b80040;
   }

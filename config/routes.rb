@@ -16,9 +16,9 @@ Rails.application.routes.draw do
       post :blink
     end
   end
-  resources :rooms do
-    collection do
-      get :map
+  resources :maps, only: [:show] do
+    member do
+      post :push_info
     end
   end
   scope 'events/:event_id' do

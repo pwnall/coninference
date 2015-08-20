@@ -23,8 +23,8 @@ class PushNotificationsClass
           window.location.reload()
         # This only gets executed if the previous line failed.
         window.location = window.location.href
-      when 'device-liability'
-        SmartCup.Liabilities.onUpdate message
+      when 'rooms-changed'
+        Coninference.Maps.onChange()
 
   # Uploads the push notification to the server, if it changed.
   _updateServer: ->
@@ -40,16 +40,16 @@ class PushNotificationsClass
   # @return {Promise<Object>} loads old registration data from localStorage
   loadRegistration: ->
     new Promise (resolve, reject) =>
-      receiverId = @_storage.getItem 'reborn-tab-push-receiver'
-      pushUrl = @_storage.getItem 'reborn-tab-push-url'
+      receiverId = @_storage.getItem 'coninference-push-receiver'
+      pushUrl = @_storage.getItem 'coninference-push-url'
       resolve receiverId: receiverId, pushUrl: pushUrl
 
   # @return {Promise<Boolean>} saves registration data to localStorage
   saveRegistration: ->
     new Promise (resolve, reject) =>
-      @_storage.setItem 'reborn-tab-push-receiver',
+      @_storage.setItem 'coninference-push-receiver',
                         @_registration.registrationId
-      @_storage.setItem 'reborn-tab-push-url',
+      @_storage.setItem 'coninference-push-url',
                         @_registration.endpoint
       resolve true
 
@@ -57,12 +57,12 @@ class PushNotificationsClass
   uploadRegistration: ->
     data =
         push_url: @_registration.endpoint
-    $.ajax(type: 'POST', url: '/session/push_info', data: data)
+    $.ajax(type: 'POST', url: window.coninferencePushUrl, data: data)
       .done => @saveRegistration()
 
 
-window.SmartCup ||= {}
-window.SmartCup.PushNotifications = new PushNotificationsClass
+window.Coninference ||= {}
+window.Coninference.PushNotifications = new PushNotificationsClass
 $ ->
-  SmartCup.PushNotifications.onload()
+  Coninference.PushNotifications.onload()
 

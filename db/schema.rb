@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150819194636) do
+ActiveRecord::Schema.define(version: 20150820041812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,13 +53,26 @@ ActiveRecord::Schema.define(version: 20150819194636) do
   add_index "events", ["url_name"], name: "index_events_on_url_name", unique: true, using: :btree
   add_index "events", ["user_id", "started_at"], name: "index_events_on_user_id_and_started_at", using: :btree
 
-  create_table "rooms", force: :cascade do |t|
-    t.string   "name",       limit: 32, null: false
-    t.string   "map_id",     limit: 32, null: false
-    t.boolean  "occupied",              null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+  create_table "maps", force: :cascade do |t|
+    t.string "name",     limit: 64,  null: false
+    t.string "url_name", limit: 32,  null: false
+    t.string "key",      limit: 64,  null: false
+    t.string "push_url", limit: 256
   end
+
+  add_index "maps", ["key"], name: "index_maps_on_key", unique: true, using: :btree
+  add_index "maps", ["name"], name: "index_maps_on_name", unique: true, using: :btree
+  add_index "maps", ["url_name"], name: "index_maps_on_url_name", unique: true, using: :btree
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "map_id",                  null: false
+    t.string  "name",         limit: 32, null: false
+    t.string  "dom_selector", limit: 32, null: false
+    t.boolean "occupied",                null: false
+  end
+
+  add_index "rooms", ["dom_selector"], name: "index_rooms_on_dom_selector", unique: true, using: :btree
+  add_index "rooms", ["map_id"], name: "index_rooms_on_map_id", using: :btree
 
   create_table "sensor_edges", force: :cascade do |t|
     t.integer  "device_id",              null: false
