@@ -1,13 +1,29 @@
-<%= form_for @device, builder: FoundationFormBuilder do |f| %>
+<%= form_for @device do |f| %>
+  <table class="device_form table">
+    <colgroup>
+      <col span="1" class="names">
+      <col span="1" class="room-names">
+      <col span="2" class="actions">
+    </colgroup>
 
-  <%= f.text_field :name, placeholder: 'Smart Cup 42', autofocus: true,
-          required: true, label: 'Cup Name' %>
+    <tr>
+      <th>Name</th>
+      <th>Room</th>
+    </tr>
 
-  <div class="row">
-    <div class="small-10 small-offset-1 columns">
-      <%= f.button type: :submit, class: 'large button expand' do %>
-        <%= fa_icon :save %> Save
-      <% end %>
-    </div>
-  </div>
+    <tr>
+      <td>
+        <%= f.text_field :name, placeholder: 'Intel Edison #1', autofocus: true %>
+      </td>
+      <td>
+        <%= f.collection_select :room_id, Room.all, :id, :name,
+              include_blank: true %>
+      </td>
+      <td>
+        <%= f.button type: :submit do %>
+          <%= fa_icon :save %> Save
+        <% end %>
+      </td>
+    </tr>
+  </table>
 <% end %>

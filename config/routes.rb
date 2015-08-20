@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   end
   get 'rooms/:room_id/sensors/:id(.:format)' => 'sensors#room_show',
       as: :room_sensor
-  resources :devices do
+  resources :devices, only: [:index, :edit, :update, :destroy] do
     member do
       post :blink
     end

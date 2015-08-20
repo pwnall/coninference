@@ -8,15 +8,6 @@ class DevicesController < ApplicationController
     @devices = Device.all
   end
 
-  # GET /devices/1
-  def show
-
-  end
-
-  # GET /devices/new
-  def new
-  end
-
   # GET /devices/1/edit
   def edit
   end
@@ -28,25 +19,7 @@ class DevicesController < ApplicationController
     @device.push_message cmd: 'blink', color: 'blue', seconds: 10
     respond_to do |format|
       format.html do
-        redirect_to @device, notice: "#{@device.name} is blinking"
-      end
-    end
-  end
-
-  # POST /devices
-  def create
-    @registration = DeviceRegistration.new device_registration_params
-    @registration.bar = @bar
-
-    respond_to do |format|
-      if @device = @registration.process
-        format.html do
-          redirect_to @device, notice: "#{@device.name} successfully linked."
-        end
-      else
-        format.html do
-          render :new
-        end
+        redirect_to devices_url, notice: "#{@device.name} is blinking"
       end
     end
   end
@@ -57,11 +30,12 @@ class DevicesController < ApplicationController
       if @device.update(device_params)
         @device.push_message cmd: 'reload'
         format.html do
-          redirect_to @device, notice: "#{@device.name} successfully updated."
+          redirect_to devices_url,
+              notice: "#{@device.name} successfully updated."
         end
       else
         format.html do
-          render :show
+          render :edit
         end
       end
     end
@@ -73,8 +47,8 @@ class DevicesController < ApplicationController
     @device.destroy
     respond_to do |format|
       format.html do
-        redirect_to bar_devices_url(@device.bar),
-            notice: "#{@device.name} successfully unlinked"
+        redirect_to devices_url,
+            notice: "Device #{@device.name} successfully removed"
       end
     end
   end
@@ -83,12 +57,11 @@ class DevicesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_device
       @device = Device.with_url_name(params[:id]).first!
-      bounce_user if @device.user and @device.user != current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:name)
+      params.require(:device).permit(:name, :room_id)
     end
 
     def device_registration_params

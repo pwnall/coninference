@@ -1,51 +1,34 @@
-<header class="row" id="page-title">
-  <h1><%= @bar.name %> Cups</h1>
-</header>
+<h2>Devices</h2>
 
+<table class="devices table">
+  <colgroup>
+    <col span="1" class="names">
+    <col span="1" class="room-names">
+    <col span="2" class="actions">
+  </colgroup>
 
-<div class="row form-top">
-  <div class="small-8 small-centered columns">
-    <p class="form-description">
-      Enter a new SmartCup's code below to activate it for this bar!
-      <span data-tooltip class="has-tip tip-right"
-          title="Look at your SmartCup's LCD display to find a 10-digit number code">
-        ?
-      </span>
-    </p>
-    <%= form_for @registration, url: bar_devices_url(@registration.bar) do |f| %>
-    <div class="row collapse postfix-radius">
-      <div class="small-8 columns">
-        <%= f.number_field :code, autofocus: true, required: true,
-              placeholder: '123 456 789 0', maxlength: 13 %>
-      </div>
-      <div class="small-4 columns">
-        <%= f.button type: 'submit', class: 'success button postfix' do %>
-          <%= fa_icon :link %> Link
-        <% end %>
-      </div>
-    </div>
-    <% end %>
-  </div>
-</div>
+  <tr>
+    <th>Name</th>
+    <th>Room</th>
+  </tr>
 
-<section class="row table">
-  <hgroup class="table-header row">
-    <div class="small-4 columns">
-      <h3>Name</h3>
-    </div>
-    <div class="small-4 columns">
-      <h3>Recently triggered sensors</h3>
-    </div>
-    <div class="small-4 columns">
-      <h3>
-        Locate Cup
-        <span data-tooltip class="has-tip tip-right"
-            title="Can't find your cup? Click to make your cup start blinking!">
-          ?
-        </span>
-      </h3>
-    </div>
-  </hgroup>
-
-  <%= render partial: 'devices/device', collection: @devices, as: :device %>
-</section>
+  <% @devices.each do |device| %>
+  <tr>
+    <td><%= device.name %></td>
+    <td><%= device_room_name(device) %></td>
+    <td>
+      <%= link_to edit_device_path(device), class: 'icon-button' do %>
+        <%= fa_icon :pencil %>
+      <% end %>
+      <%= link_to blink_device_path(device), class: 'icon-button',
+            method: :post do %>
+        <%= fa_icon :'lightbulb-o' %>
+      <% end %>
+      <%= link_to device_path(device), class: 'icon-button',
+            method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <%= fa_icon :trash %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

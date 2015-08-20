@@ -12,8 +12,19 @@ header#page-title {
   margin-bottom: 1rem;
 }
 
+a:visited {
+  color: #008CBA;
+}
+
 .table {
+  width: 100%;
+  border: none;
+  background: none;
   text-align: center;
+
+  th, td {
+    text-align: center;
+  }
 
   hgroup.table-header {
     margin-bottom: 1.5rem;
