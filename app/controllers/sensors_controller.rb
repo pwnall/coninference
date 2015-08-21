@@ -6,6 +6,10 @@ class SensorsController < ApplicationController
   # GET /events/1/devices/1/sensors
   # GET /events/1/devices/1/sensors.json
   def index
+    respond_to do |format|
+      format.html { render layout: 'full_screen' }
+      format.json
+    end
   end
 
   # GET /events/1/devices/1/sensors/light.json

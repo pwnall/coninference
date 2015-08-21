@@ -2,9 +2,10 @@
 <h3>Readings from <%= @device.name %></h3>
 
 <% SensorEdge::KINDS.each do |kind| %>
+<div class="sensor-data-container">
   <h4><%= kind %></h4>
-
   <%= content_tag :canvas, '', class: 'sensor-data',
         data: { sensor_url: event_device_sensor_url(@event, @device, kind,
                                                     format: :json) } %>
+</div>
 <% end %>

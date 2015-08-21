@@ -10,6 +10,10 @@ class RoomsController < ApplicationController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
+    respond_to do |format|
+      format.html { render layout: 'full_screen' }
+      format.json
+    end
   end
 
   # POST /rooms/1/push_info

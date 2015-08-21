@@ -14,7 +14,8 @@ class SensorEdge < ActiveRecord::Base
   validates :device_time, presence: true
 
   # The types of sensors supported by the system.
-  KINDS = Set.new [:loudness, :micpower, :motion, :opticalflow, :pirxl]
+  KINDS = Set.new [:loudness, :micpower, :motion, :opticalflow, :pirxl,
+                   :vibration]
   #KINDS = Set.new [:micpower]
 
   # Changes that occurred before a given time.

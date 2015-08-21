@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ConINference</title>
+
+  <%= stylesheet_link_tag :application %>
+  <%= javascript_include_tag "vendor/modernizr" %>
+  <%= favicon_link_tag %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+<header id="header">
+  <%= render 'layouts/top_nav' %>
+</header>
+
+<article id="page-body">
+<% if flash[:notice] %>
+<p data-alert id="flash-notice-box">
+  <%= flash[:notice] %>
+  <a href="#" title="Close" class="close">&times;</a>
+</p>
+<% end %>
+<% if flash[:alert] %>
+<p data-alert id="flash-alert-box">
+  <%= flash[:alert] %>
+  <a href="#" title="Close" class="close">&times;</a>
+</p>
+<% end %>
+
+<%= yield %>
+</article>
+
+<footer id="footer">
+  <%= render 'layouts/footer_nav' %>
+</footer>
+
+<%= javascript_include_tag :application %>
+<% if @room || @map %>
+<%= w3gram_setup_tag @room || @map %>
+<% end %>
+</body>
+</html>
+

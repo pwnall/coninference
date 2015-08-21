@@ -14,7 +14,9 @@ class SensorDataGraph
       pointStrokeColor: "#fff",
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(151,187,205,1)",
-    @_chart = new Chart(@_context).Line labels: [], datasets: [dataset]
+    @_chart = new Chart(@_context).Line(
+        { labels: [], datasets: [dataset] },
+        { animation: false })
 
     @_fetchData().then (data) =>
       @_updateData data
