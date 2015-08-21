@@ -14,7 +14,9 @@ class MapsClass
     for room in rooms
       console.log room
       element = document.querySelector '#' + room.dom_selector
-      if room.occupied
+      if !room.has_device
+        element.setAttribute 'class', 'no-device'
+      else if room.occupied
         element.setAttribute 'class', 'busy'
       else
         element.setAttribute 'class', 'free'

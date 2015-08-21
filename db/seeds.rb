@@ -10,9 +10,9 @@ sync.update! occupied: false
 check.update! occupied: false
 heart.update! occupied: true
 
-puts 'Adding a device to each room...'
+puts 'Adding a device to select rooms...'
 Device.destroy_all
-Room.all.each do |room|
-  room.devices.build name: room.name
-  room.save!
-end
+sync.devices.build name: 'sync'
+sync.save!
+heart.devices.build name: 'heart'
+heart.save!

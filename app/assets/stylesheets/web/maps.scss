@@ -1,15 +1,17 @@
 svg#map {
-  fill: none;
-  fill-opacity: 35%;
-  stroke: #002fff;
   stroke-width: 4;
   stroke-miterlimit: 10;
+  fill-opacity: 35%;
 
+  g.no-device * {
+    stroke: #00061f;
+    fill: #00061f;
+    fill-opacity: 15%;
+  }
   g.free * {
     stroke: #74b800;
     fill: #74b800;
   }
-
   g.busy * {
     stroke: #b80040;
     fill: #b80040;
