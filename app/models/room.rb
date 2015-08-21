@@ -58,7 +58,7 @@ class Room < ActiveRecord::Base
     sensors = sensors_at Time.current
     return true if sensors[:pirxl] && sensors[:pirxl] > 0
     return true if sensors[:motion] && sensors[:motion] > 0
-    return true if sensors[:micpower] && sensors[:micpower] > -45
+    return true if sensors[:micpower] && sensors[:micpower] > -17.666
     return true if sensors[:opticalflow] && sensors[:opticalflow] > 2
     false
   end

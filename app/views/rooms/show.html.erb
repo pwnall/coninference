@@ -2,7 +2,7 @@
 
 <% SensorEdge::KINDS.each do |kind| %>
 <div class="sensor-data-container">
-  <h3><%= kind %></h3>
+  <h3><%= sensor_kind_name kind %></h3>
   <%= content_tag :canvas, '', class: 'sensor-data',
         data: { sensor_url: room_sensor_url(@room, kind, format: :json) } %>
 </div>
