@@ -15,8 +15,10 @@ class RoomsClass
     element = document.querySelector '#occupancy-indicator'
     if occupied
       element.setAttribute 'class', 'busy'
+      element.innerHTML = 'Busy'
     else
       element.setAttribute 'class', 'free'
+      element.innerHTML = 'Free'
 
 window.Coninference ||= {}
 window.Coninference.Rooms = new RoomsClass

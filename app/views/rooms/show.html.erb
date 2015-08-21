@@ -1,7 +1,10 @@
-<h2>Room <%= @room.name %> on <%= @room.map.name %><h2>
+<h2 class="room-info">
+  <div id="room-name">Room <%= @room.name %> on <%= @room.map.name %></div>
 
-<div id="occupancy-indicator">
-</div>
+  <div id="occupancy-indicator">
+    Hello Dropbox
+  </div>
+</h2>
 
 <% SensorEdge::KINDS.each do |kind| %>
 <div class="sensor-data-container">

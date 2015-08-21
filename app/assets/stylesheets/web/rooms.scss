@@ -1,11 +1,41 @@
-#occupancy-indicator {
-  width: 40%;
-  height: 2rem;
-  
-  &.busy {
-    background-color: red;
+h2.room-info {
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+
+  flex-direction: row;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+
+  #room-name {
+    -moz-box-flex: 3;
+    -webkit-flex: 3;
+    -moz-flex: 3;
+    -webkit-flex: 3 1 60%;
+    flex: 3 1 60%;
   }
-  &.free {
-    background-color: green;
+  #occupancy-indicator {
+    -moz-box-flex: 2;
+    -webkit-flex: 2;
+    -moz-flex: 2;
+    -webkit-flex: 2 1 40%;
+    flex: 2 1 40%;
+
+    // height: 5rem;
+    // line-height: 5rem;
+    margin: 0 auto;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+
+    &.busy {
+      background-color: #b80040;
+    }
+    &.free {
+      background-color: #74b800;
+    }
   }
 }
