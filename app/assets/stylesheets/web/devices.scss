@@ -1,3 +1,11 @@
-table.devices td {
-  width: 20%;
+table.devices {
+  td:not(.actions), th {
+    width: 20%;
+  }
+}
+
+table.device-form {
+  td:not(.actions), th {
+    width: 40%;
+  }
 }
