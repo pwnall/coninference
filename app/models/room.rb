@@ -56,10 +56,10 @@ class Room < ActiveRecord::Base
   # Computes whether the room is occupied or not, based on sensor values.
   def occupied_from_sensors
     sensors = sensors_at Time.current
-    return true if sensors[:opticalflow] && sensors[:opticalflow] > 100
     return true if sensors[:pirxl] && sensors[:pirxl] > 0
     return true if sensors[:motion] && sensors[:motion] > 0
-    return true if sensors[:micpower] && sensors[:micpower] > -70
+    return true if sensors[:micpower] && sensors[:micpower] > -45
+    return true if sensors[:opticalflow] && sensors[:opticalflow] > 2
     false
   end
 end
