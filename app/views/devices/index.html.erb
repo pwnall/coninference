@@ -1,32 +1,28 @@
 <h2>Devices</h2>
 
 <table class="devices table">
-  <colgroup>
-    <col span="1" class="names">
-    <col span="1" class="room-names">
-    <col span="2" class="actions">
-  </colgroup>
-
   <tr>
     <th>Name</th>
+    <th>Serial #</th>
     <th>Room</th>
   </tr>
 
   <% @devices.each do |device| %>
   <tr>
-    <td><%= device.name %></td>
-    <td><%= device_room_name(device) %></td>
-    <td>
+    <td class="name"><%= device.name %></td>
+    <td class="serial"><%= device.serial %></td>
+    <td class="room"><%= device_room_name(device) %></td>
+    <td class="actions">
       <%= link_to edit_device_path(device), class: 'icon-button' do %>
-        <%= fa_icon :pencil %>
+        <%= fa_icon :pencil %> Edit
       <% end %>
       <%= link_to blink_device_path(device), class: 'icon-button',
             method: :post do %>
-        <%= fa_icon :'lightbulb-o' %>
+        <%= fa_icon :'lightbulb-o' %> Blink board
       <% end %>
       <%= link_to device_path(device), class: 'icon-button',
             method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= fa_icon :trash %>
+        <%= fa_icon :trash %> Remove
       <% end %>
     </td>
   </tr>

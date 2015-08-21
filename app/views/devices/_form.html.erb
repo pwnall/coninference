@@ -1,11 +1,5 @@
 <%= form_for @device do |f| %>
   <table class="device_form table">
-    <colgroup>
-      <col span="1" class="names">
-      <col span="1" class="room-names">
-      <col span="2" class="actions">
-    </colgroup>
-
     <tr>
       <th>Name</th>
       <th>Room</th>
@@ -19,7 +13,7 @@
         <%= f.collection_select :room_id, Room.all, :id, :name,
               include_blank: true %>
       </td>
-      <td>
+      <td class="actions">
         <%= f.button type: :submit do %>
           <%= fa_icon :save %> Save
         <% end %>
