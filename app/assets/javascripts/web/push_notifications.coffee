@@ -26,6 +26,7 @@ class PushNotificationsClass
       when 'rooms-changed'
         Coninference.Maps.onChange()
       when 'room-sensors-changed'
+        Coninference.Rooms.onChange()
         for sensorGraph in Coninference.sensorGraphs
           sensorGraph.onChange()
 
@@ -68,4 +69,3 @@ window.Coninference ||= {}
 window.Coninference.PushNotifications = new PushNotificationsClass
 $ ->
   Coninference.PushNotifications.onload()
-

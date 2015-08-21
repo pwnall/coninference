@@ -1,0 +1,11 @@
+#occupancy-indicator {
+  width: 40%;
+  height: 2rem;
+  
+  &.busy {
+    background-color: red;
+  }
+  &.free {
+    background-color: green;
+  }
+}
