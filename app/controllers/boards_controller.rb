@@ -42,6 +42,7 @@ class BoardsController < ApplicationController
   # OPTIONS /boards
   def cors_options
     response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT'
+    response.headers['Access-Control-Max-Age'] = '86400'
     head :ok
   end
 
