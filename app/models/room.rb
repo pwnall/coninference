@@ -44,6 +44,8 @@ class Room < ActiveRecord::Base
   private :generate_key
 
   def sensors_changed(device, sensor_diff)
+    update! occupied: sensors_at(Time.now)[:opticalflow] > 100
     push_message cmd: 'room-sensors-changed'
+    map.push_message cmd: 'rooms-changed'
   end
 end
