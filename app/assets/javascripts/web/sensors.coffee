@@ -2,11 +2,12 @@ class SensorDataGraph
   constructor: (domRoot) ->
     @_domRoot = domRoot
     @_url = domRoot.getAttribute 'data-sensor-url'
+    @_threshold = domRoot.getAttribute 'data-sensor-threshold'
     @_context = @_domRoot.getContext '2d'
     @_data = []
     @_built = false
     @_pendingFetch = null
-    dataset =
+    datasets = [{
       data: []
       fillColor: "rgba(151,187,205,0.2)",
       strokeColor: "rgba(151,187,205,1)",
@@ -14,8 +15,20 @@ class SensorDataGraph
       pointStrokeColor: "#fff",
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(151,187,205,1)",
+    }]
+    if @_threshold
+      datasets.push({
+        data: []
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+      })
+
     @_chart = new Chart(@_context).Line(
-        { labels: [], datasets: [dataset] },
+        { labels: [], datasets: datasets },
         { animation: false })
 
     @_fetchData().then (data) =>
@@ -44,7 +57,11 @@ class SensorDataGraph
 
     for item in newData
       if item.ts > tsMax
-        @_chart.addData [item.value], item.ts
+        time = (new Date(item.ts * 1000)).toLocaleTimeString()
+        if @_threshold
+          @_chart.addData [item.value, @_threshold], time
+        else
+          @_chart.addData [item.value], time
     @_data = newData
 
   # @return {Promise<Array>} promise resolved with an array of sensor readings

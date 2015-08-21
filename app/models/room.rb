@@ -53,6 +53,12 @@ class Room < ActiveRecord::Base
     push_message cmd: 'room-sensors-changed'
   end
 
+  # Thresholds for each sensor.
+  SENSOR_THRESHOLDS = {
+    micpower: -17.666,
+    opticalflow: 2,
+  }.freeze
+
   # Computes whether the room is occupied or not, based on sensor values.
   def occupied_from_sensors
     sensors = sensors_at Time.current
