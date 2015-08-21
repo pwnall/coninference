@@ -3,6 +3,7 @@ class MapsController < ApplicationController
 
   # Render the floorplan.
   def show
+    render layout: 'full_screen'
   end
 
   # POST /maps/1/push_info
