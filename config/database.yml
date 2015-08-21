@@ -80,5 +80,7 @@ test:
 #
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  database: coninference_development
+#  url: <%= ENV['DATABASE_URL'] %>
 
